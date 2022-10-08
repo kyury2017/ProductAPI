@@ -5,9 +5,9 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPIProducts", "WebAPIProducts\WebAPIProducts.csproj", "{83C2E9C5-163B-4532-AA2D-D302D8B318FB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLTestDb", "SQLTestDb", "{CDAF0B0B-334D-49DC-AD6E-AF9EF6068C17}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{A86BF9B3-7E92-4DAC-8540-8B419344C1FD}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\Documents\SQL Server Management Studio\TestDb_V03.sql = ..\..\..\Documents\SQL Server Management Studio\TestDb_V03.sql
+		ScriptCreateTestDb.sql = ScriptCreateTestDb.sql
 	EndProjectSection
 EndProject
 Global
