@@ -15,35 +15,64 @@ namespace WebAPIProducts.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly WebAPIProductsContext _context;
-
-        public ProductsController(WebAPIProductsContext context)
+        private readonly ILogger _logger;
+        public ProductsController(WebAPIProductsContext context, ILogger<ProductsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Products
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProduct()
         {
-            return await _context.Product.ToListAsync();
-        }
-
-        // GET: api/Products/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(Guid id)
-        {
-            var product = await _context.Product.FindAsync(id);
-
-            if (product == null)
+            try
             {
-                return NotFound();
+                var result= await _context.Product.ToListAsync();
+                int count = result==null? 0:result.Count;
+                string mess = string.Format("{0} Product Objects Selected - {1}", count, DateTime.UtcNow.ToLongTimeString());
+                _logger.LogInformation(mess);
+                return result;
             }
+            catch
+            {
+#if DEBUG
+                throw;
+#else
+                return this.StatusCode(404);
+#endif 
+            }
+        }
+       
+        // GET: api/Products/5
+        [HttpGet("{name}")]
+        public async Task<ActionResult<List<Product>>> GetProduct(string name)
+        {
+            try
+            {
+                var result = await _context.Product.Where(w => EF.Functions.Like(w.Name, string.Format("%{0}%", name))).ToListAsync();
+                int count = result == null ? 0 : result.Count;
+                string mess = string.Format("{0} Product Objects Selected - {1}", count, DateTime.UtcNow.ToLongTimeString());
+                _logger.LogInformation(mess);
 
-            return product;
+                if (result == null || result.Count == 0)
+                {
+                    return NotFound();
+                }
+
+                return result;
+            }
+            catch
+            {
+#if DEBUG
+                throw;
+#else
+                return this.StatusCode(404);
+#endif 
+            }
         }
 
         // PUT: api/Products/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(Guid id, Product product)
         {
@@ -51,22 +80,26 @@ namespace WebAPIProducts.Controllers
             {
                 return BadRequest();
             }
-
             _context.Entry(product).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
+                string mess = string.Format("Changed product with an identifier - {0}\t{1}", id, DateTime.UtcNow.ToLongTimeString());
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!_context.Product.Any(a=>a.ID==id))
                 {
                     return NotFound();
                 }
                 else
                 {
+#if DEBUG
                     throw;
+#else
+                    return this.StatusCode(404);
+#endif 
                 }
             }
 
@@ -74,35 +107,54 @@ namespace WebAPIProducts.Controllers
         }
 
         // POST: api/Products
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
-            _context.Product.Add(product);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetProduct", new { id = product.ID }, product);
+            try
+            {
+                if (product == null)
+                    throw new ArgumentNullException();
+                _context.Product.Add(product);
+                await _context.SaveChangesAsync();
+                string mess = string.Format("Added product with an identifier - {0}\t{1}", product.ID, DateTime.UtcNow.ToLongTimeString());
+                return CreatedAtAction("GetProduct", new { id = product.ID }, product);
+            }
+            catch
+            {
+#if DEBUG
+                throw;
+#else
+                return this.StatusCode(404);
+#endif
+            }
         }
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(Guid id)
         {
-            var product = await _context.Product.FindAsync(id);
-            if (product == null)
+            try
             {
-                return NotFound();
+                var product = await _context.Product.FindAsync(id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Product.Remove(product);
+                await _context.SaveChangesAsync();
+                string mess = string.Format("Deleted product with an identifier - {0}\t{1}", product.ID, DateTime.UtcNow.ToLongTimeString());
+                return NoContent();
+            }
+            catch
+            {
+#if DEBUG
+                throw;
+#else
+                return this.StatusCode(404);
+#endif 
             }
 
-            _context.Product.Remove(product);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool ProductExists(Guid id)
-        {
-            return _context.Product.Any(e => e.ID == id);
         }
     }
 }
