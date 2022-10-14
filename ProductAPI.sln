@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Text", "Text", "{927B995F-0
 		Тестовое_задание_для_middle dev_light_v1.1.txt = Тестовое_задание_для_middle dev_light_v1.1.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{4CD36F45-FEF7-4265-848A-CDBF06BE7C51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceProducts", "InterfaceProducts\InterfaceProducts.csproj", "{9CC5F73B-8936-4E13-8885-7A032F5F6CEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,9 +29,16 @@ Global
 		{83C2E9C5-163B-4532-AA2D-D302D8B318FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83C2E9C5-163B-4532-AA2D-D302D8B318FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83C2E9C5-163B-4532-AA2D-D302D8B318FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC5F73B-8936-4E13-8885-7A032F5F6CEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC5F73B-8936-4E13-8885-7A032F5F6CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC5F73B-8936-4E13-8885-7A032F5F6CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC5F73B-8936-4E13-8885-7A032F5F6CEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9CC5F73B-8936-4E13-8885-7A032F5F6CEE} = {4CD36F45-FEF7-4265-848A-CDBF06BE7C51}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {966B921A-4BA5-4443-8053-F6A5E6F075EA}
