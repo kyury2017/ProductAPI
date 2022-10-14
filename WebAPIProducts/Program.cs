@@ -1,9 +1,7 @@
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebAPIProducts.Data;
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddDbContext<WebAPIProductsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebAPIProductsContext") ?? throw new InvalidOperationException("Connection string 'WebAPIProductsContext' not found.")));
 
