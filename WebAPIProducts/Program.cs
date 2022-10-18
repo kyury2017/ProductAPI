@@ -1,9 +1,13 @@
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WebAPIProducts.Data;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<WebAPIProductsContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("WebAPIProductsContext") ?? throw new InvalidOperationException("Connection string 'WebAPIProductsContext' not found.")));
+
+string connectionSting = builder.Configuration.GetConnectionString("WebAPIProductsContext") ?? throw new InvalidOperationException("Connection string 'WebAPIProductsContext' not found.");
+
+builder.Services.AddSingleton<ServiceData.IData>(provider => new ServiceData.Data(connectionSting));
 
 // Add services to the container.
 builder.Services.AddControllers();
