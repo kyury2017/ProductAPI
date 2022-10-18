@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Text", "Text", "{927B995F-0
 		Тестовое_задание_для_middle dev_light_v1.1.txt = Тестовое_задание_для_middle dev_light_v1.1.txt
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{8DDF851D-1ECD-414E-98CF-1E474C5C0157}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceData", "ServiceProject\ServiceData.csproj", "{6E1C2D98-3F32-4305-A792-E3A3CAC6F0EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,14 @@ Global
 		{83C2E9C5-163B-4532-AA2D-D302D8B318FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83C2E9C5-163B-4532-AA2D-D302D8B318FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83C2E9C5-163B-4532-AA2D-D302D8B318FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DDF851D-1ECD-414E-98CF-1E474C5C0157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDF851D-1ECD-414E-98CF-1E474C5C0157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDF851D-1ECD-414E-98CF-1E474C5C0157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDF851D-1ECD-414E-98CF-1E474C5C0157}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E1C2D98-3F32-4305-A792-E3A3CAC6F0EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E1C2D98-3F32-4305-A792-E3A3CAC6F0EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E1C2D98-3F32-4305-A792-E3A3CAC6F0EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E1C2D98-3F32-4305-A792-E3A3CAC6F0EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Model;
+using WebAPIProducts.Data;
+using WebAPIProducts.Models;
+
+namespace WebAPIProducts.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProductsController : ControllerBase
+    {
+        private readonly ServiceData.IData _context;
+        public ProductsController(ServiceData.IData context)
+        {
+            _context = context;
+        }
+
+        // GET: api/Products
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Model.Product>>> GetProduct()
+        {
+                return await _context.ProductsGet();
+        }
+
+        // GET: api/Products/5
+        [HttpGet("{name}")]
+        public async Task<ActionResult<IEnumerable<Model.Product>>> GetProduct(string name)
+        {
+            //return new ActionResult<IEnumerable<Model.Product>>(await Task.Run(() => _context.ProductsGet(name)));
+            return await _context.ProductsGet(name);
+        }
+        // PUT: api/Products/5
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Model.Product>> PutProduct(Guid id, Model.Product product)
+        {
+            if (id != product.ID)
+            {
+                return BadRequest();
+            }
+            //return new ActionResult<Model.Product>(await Task.Run(() => _context.ProductChenge(product)));
+            return await _context.ProductChenge(product);
+        }
+
+        // POST: api/Products
+        [HttpPost]
+        public async Task<ActionResult<Model.Product>> PostProduct(Model.Product product)
+        {
+            if (product == null)
+                throw new ArgumentNullException();
+            //return new ActionResult<Model.Product>(await Task.Run(() => _context.ProductAdd(product)));
+            return await _context.ProductAdd(product);
+        }
+        // DELETE: api/Products/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteProduct(Guid id)
+        {
+
+            //var result= new ActionResult<bool>(await Task.Run(() => _context.ProductDelete(id)));
+            var result = await _context.ProductDelete(id);
+            if (result.Value)
+                return Ok();
+            else
+                return base.NotFound();
+        }
+    }
+    
+}
+/*
+    using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -158,3 +234,5 @@ namespace WebAPIProducts.Controllers
         }
     }
 }
+ 
+ */
