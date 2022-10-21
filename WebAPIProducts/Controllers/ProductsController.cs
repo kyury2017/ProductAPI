@@ -22,20 +22,15 @@ namespace WebAPIProducts.Controllers
         {
             _context = context;
         }
-
-        // GET: api/Products
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Model.Product>>> GetProduct()
+        [HttpPost()]
+        [Route("Find")]
+        public async Task<ActionResult<IEnumerable<Model.Product>>> Find(
+            [FromBody(EmptyBodyBehavior = Microsoft.AspNetCore.Mvc.ModelBinding.EmptyBodyBehavior.Allow)]string name)
         {
-                return await _context.ProductsGet();
-        }
-
-        // GET: api/Products/5
-        [HttpGet("{name}")]
-        public async Task<ActionResult<IEnumerable<Model.Product>>> GetProduct(string name)
-        {
-            //return new ActionResult<IEnumerable<Model.Product>>(await Task.Run(() => _context.ProductsGet(name)));
-            return await _context.ProductsGet(name);
+            if (string.IsNullOrEmpty(name)) 
+            { return await _context.ProductsGet(); }
+            else 
+            { return await _context.ProductsGet(name); }
         }
         // PUT: api/Products/5
         [HttpPut("{id}")]
