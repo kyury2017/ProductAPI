@@ -159,7 +159,9 @@ namespace ServiceData
         {
             try
             {
-                return await context.Product.Where(w => EF.Functions.Like(w.Name, string.Format("%{0}%", name))).ToListAsync();
+                //return await context.Product.Where(w => EF.Functions.Like(w.Name, string.Format("%{0}%", name))).ToListAsync();
+                return await context.Product.Where(
+                    w => EF.Functions.Like(w.Name.ToUpper(), string.Format("%{0}%", name.ToUpper()))).ToListAsync();
             }
             catch
             {
