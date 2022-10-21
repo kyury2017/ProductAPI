@@ -48,12 +48,8 @@ namespace WebAPIProducts.Controllers
 
         // PUT api/<ProductVersionController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Model.ProductVersion>> Put(Guid id, ProductVersion productVersion)
+        public async Task<ActionResult<Model.ProductVersion>> Put(ProductVersion productVersion)
         {
-            if (id != productVersion.ID)
-            {
-                return BadRequest();
-            }
             return await _context.ProductVersionChenge(productVersion);
         }
 

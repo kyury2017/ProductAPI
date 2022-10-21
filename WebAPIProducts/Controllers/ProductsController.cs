@@ -34,13 +34,8 @@ namespace WebAPIProducts.Controllers
         }
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Model.Product>> PutProduct(Guid id, Model.Product product)
+        public async Task<ActionResult<Model.Product>> PutProduct(Model.Product product)
         {
-            if (id != product.ID)
-            {
-                return BadRequest();
-            }
-            //return new ActionResult<Model.Product>(await Task.Run(() => _context.ProductChenge(product)));
             return await _context.ProductChenge(product);
         }
 
