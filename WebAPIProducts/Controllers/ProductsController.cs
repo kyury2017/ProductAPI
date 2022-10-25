@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +38,23 @@ namespace WebAPIProducts.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<Model.Product>> PutProduct(Model.Product product)
         {
-            return await _context.ProductChenge(product);
+            if (product == null)
+                return BadRequest();
+            try
+            {
+                return await _context.ProductChenge(product);
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound();
+            }
+            catch (DbUpdateConcurrencyException ce)//нарушения параллелизма при сохранении в базе данных. Нарушение параллелизма возникает, когда во время сохранения затрагивается неожиданное количество строк.
+            {
+                if (ce.Entries.Count != 0)
+                    return Conflict();
+                else
+                    return NotFound();
+            }
         }
 
         // POST: api/Products
@@ -44,21 +62,35 @@ namespace WebAPIProducts.Controllers
         public async Task<ActionResult<Model.Product>> PostProduct(Model.Product product)
         {
             if (product == null)
-                throw new ArgumentNullException();
-            //return new ActionResult<Model.Product>(await Task.Run(() => _context.ProductAdd(product)));
-            return await _context.ProductAdd(product);
+                return BadRequest();
+            try
+            {
+                return await _context.ProductAdd(product);
+            }
+            catch (DbUpdateConcurrencyException ce)
+            {
+                    return Conflict();
+            }
         }
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(Guid id)
         {
-
-            //var result= new ActionResult<bool>(await Task.Run(() => _context.ProductDelete(id)));
-            var result = await _context.ProductDelete(id);
-            if (result.Value)
-                return Ok();
-            else
-                return base.NotFound();
+            try
+            {
+                var result = await _context.ProductDelete(id);
+                if (result.Value)
+                    return Ok();
+                else
+                    return base.NotFound();
+            }
+            catch (DbUpdateConcurrencyException ce)
+            {
+                if (ce.Entries.Count != 0)
+                    return Conflict();
+                else
+                    return NotFound();
+            }
         }
     }
     

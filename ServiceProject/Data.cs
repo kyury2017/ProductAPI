@@ -107,6 +107,11 @@ namespace ServiceData
         {
             try
             {
+                var p= await context.Product.FindAsync(product.ID);
+                if (p == null)
+                {
+                    throw new ArgumentNullException();
+                }
                 context.Entry(product).State = EntityState.Modified;
                 await context.SaveChangesAsync();
             }
