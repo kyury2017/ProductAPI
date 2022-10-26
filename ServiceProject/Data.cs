@@ -246,7 +246,6 @@ namespace ServiceData
                 }
             }
 
-            return new ActionResult<ProductVersion>(productVersion);
         }
 
         private async Task<ActionResult<bool>> ProductVertionDelete(Guid id)
