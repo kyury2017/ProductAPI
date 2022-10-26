@@ -701,6 +701,78 @@ USE [master]
 GO
 ALTER DATABASE [TestDb] SET  READ_WRITE 
 GO
+
+-- Create Trigger for Product
+print('Create triggers.')
+
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TRIGGER [dbo].[OnProductChangeWriter] ON [dbo].[Product]
+   FOR INSERT, UPDATE, DELETE  
+AS 
+IF(@@ROWCOUNT = 0) 
+RETURN 
+
+IF (SELECT COUNT(*) from inserted) <> 0
+BEGIN
+	IF((select count(*) from deleted) = 0)
+	BEGIN
+		INSERT INTO EventLog (Description) SELECT  'insert Product ID={'+CONVERT(nchar(200), inserted.ID)+'}' FROM inserted 
+		RETURN
+	END
+	ELSE
+	BEGIN
+		INSERT INTO EventLog (Description) SELECT  'update Product ID={'+CONVERT(nchar(200), inserted.ID)+'}' FROM inserted 
+	END
+END
+ELSE
+BEGIN
+	INSERT INTO EventLog (Description) SELECT  'delete Product ID={'+CONVERT(nchar(200), deleted.ID)+'}' FROM    deleted
+END
+GO
+
+ALTER TABLE [dbo].[Product] ENABLE TRIGGER [OnProductChangeWriter]
+GO
+-- Create Trigger for ProductVersion
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE TRIGGER [dbo].[OnProductVersionChangeWriter] ON [dbo].[ProductVersion]
+  FOR INSERT, UPDATE, DELETE
+AS 
+IF(@@ROWCOUNT = 0) 
+RETURN 
+
+IF (SELECT COUNT(*) from inserted) <> 0
+BEGIN
+	IF((select count(*) from deleted) = 0)
+	BEGIN
+		INSERT INTO EventLog (Description) SELECT  'insert ProductVersion ID={'+CONVERT(nchar(200), inserted.ID)+'}' FROM inserted    
+		RETURN
+	END
+	ELSE
+	BEGIN
+		INSERT INTO EventLog (Description) SELECT  'update ProductVersion ID={'+CONVERT(nchar(200), inserted.ID)+'}' FROM inserted    
+		RETURN
+	END
+END
+ELSE
+BEGIN
+	INSERT INTO EventLog (Description) SELECT  'delete ProductVersion ID={'+CONVERT(nchar(200), deleted.ID)+'}' FROM    deleted 
+END
+GO
+
+ALTER TABLE [dbo].[ProductVersion] ENABLE TRIGGER [OnProductVersionChangeWriter]
+GO
+
 -- Add Test Data
 print('Add Test data.')
 
@@ -779,73 +851,3 @@ INSERT INTO Product (ID,Name, Description) VALUES (@pID,'Name 17',NULL)
 		INSERT INTO ProductVersion (ProductID, Name, Description, Width, Height, Length) VALUES (@pID,'Version 01', NULL, 115,117,200)
 		INSERT INTO ProductVersion (ProductID, Name, Description, Width, Height, Length) VALUES (@pID,'Version 02', NULL, 205,207,210)
 
--- Create Trigger for Product
-print('Create triggers.')
-
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TRIGGER [dbo].[OnProductChangeWriter] ON [dbo].[Product]
-   FOR INSERT, UPDATE, DELETE  
-AS 
-IF(@@ROWCOUNT = 0) 
-RETURN 
-
-IF (SELECT COUNT(*) from inserted) <> 0
-BEGIN
-	IF((select count(*) from deleted) = 0)
-	BEGIN
-		INSERT INTO EventLog (Description) SELECT  'insert Product ID={'+CONVERT(nchar(200), inserted.ID)+'}' FROM inserted 
-		RETURN
-	END
-	ELSE
-	BEGIN
-		INSERT INTO EventLog (Description) SELECT  'update Product ID={'+CONVERT(nchar(200), inserted.ID)+'}' FROM inserted 
-	END
-END
-ELSE
-BEGIN
-	INSERT INTO EventLog (Description) SELECT  'delete Product ID={'+CONVERT(nchar(200), deleted.ID)+'}' FROM    deleted
-END
-GO
-
-ALTER TABLE [dbo].[Product] ENABLE TRIGGER [OnProductChangeWriter]
-GO
--- Create Trigger for ProductVersion
-
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-CREATE TRIGGER [dbo].[OnProductVersionChangeWriter] ON [dbo].[ProductVersion]
-  FOR INSERT, UPDATE, DELETE
-AS 
-IF(@@ROWCOUNT = 0) 
-RETURN 
-
-IF (SELECT COUNT(*) from inserted) <> 0
-BEGIN
-	IF((select count(*) from deleted) = 0)
-	BEGIN
-		INSERT INTO EventLog (Description) SELECT  'insert ProductVersion ID={'+CONVERT(nchar(200), inserted.ID)+'}' FROM inserted    
-		RETURN
-	END
-	ELSE
-	BEGIN
-		INSERT INTO EventLog (Description) SELECT  'update ProductVersion ID={'+CONVERT(nchar(200), inserted.ID)+'}' FROM inserted    
-		RETURN
-	END
-END
-ELSE
-BEGIN
-	INSERT INTO EventLog (Description) SELECT  'delete ProductVersion ID={'+CONVERT(nchar(200), deleted.ID)+'}' FROM    deleted 
-END
-GO
-
-ALTER TABLE [dbo].[ProductVersion] ENABLE TRIGGER [OnProductVersionChangeWriter]
-GO

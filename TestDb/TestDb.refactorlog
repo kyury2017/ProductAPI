@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="4283af85-0170-46af-90c1-cbaf0f1863eb" ChangeDateTime="10/25/2022 16:32:44">
+    <Property Name="ElementName" Value="[dbo].[Prodact].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Prodact]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3cf58e2a-9cce-48e0-ad89-bb70292e1bf7" ChangeDateTime="10/25/2022 16:53:41">
+    <Property Name="ElementName" Value="[dbo].[Prodact].[IX_Prodact_Column]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[dbo].[Prodact]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[IX_Prodact_Uname]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="878cdc7d-54eb-471d-9d07-acfa9f9fa018" ChangeDateTime="10/26/2022 09:03:06">
+    <Property Name="ElementName" Value="[dbo].[ProductVersion].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ProductVersion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9066fdba-72b9-49a6-a056-1796eb4936d1" ChangeDateTime="10/26/2022 09:48:36">
+    <Property Name="ElementName" Value="[dbo].[ProductVersion].[IX_ProductVersion_Column]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[dbo].[ProductVersion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[I_Name]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3736c07d-d166-4758-91cc-cbc1c5d2135c" ChangeDateTime="10/26/2022 09:48:47">
+    <Property Name="ElementName" Value="[dbo].[ProductVersion].[I_Name]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[dbo].[ProductVersion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[Ix_Name]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="02120f42-dd82-4ba1-b7af-2b59e0f03a3c" ChangeDateTime="10/26/2022 09:50:17">
+    <Property Name="ElementName" Value="[dbo].[ProductVersion].[IX_ProductVersion_Column]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[dbo].[ProductVersion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[IxCreatingDate]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="436cf7a0-564f-46e2-a6fb-49e8b584eacf" ChangeDateTime="10/26/2022 09:52:00">
+    <Property Name="ElementName" Value="[dbo].[ProductVersion].[IX_ProductVersion_Column]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[dbo].[ProductVersion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[IxWidth]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f73fef88-db0a-4b78-af28-69a372d22ae3" ChangeDateTime="10/26/2022 09:52:46">
+    <Property Name="ElementName" Value="[dbo].[ProductVersion].[IX_ProductVersion_Column]" />
+    <Property Name="ElementType" Value="SqlIndex" />
+    <Property Name="ParentElementName" Value="[dbo].[ProductVersion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[IxHeight]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="57d4c192-0ede-47c9-a758-1ea95678e897" ChangeDateTime="10/26/2022 10:38:12">
+    <Property Name="ElementName" Value="[dbo].[EventLog].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[EventLog]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ID" />
+  </Operation>
+</Operations>
