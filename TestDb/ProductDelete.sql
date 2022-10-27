@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[ProjectDelete]
+﻿CREATE PROCEDURE [dbo].[ProductDelete]
 	@id uniqueidentifier
 AS
 BEGIN

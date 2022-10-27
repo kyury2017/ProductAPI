@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Text", "Text", "{927B995F-0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{8DDF851D-1ECD-414E-98CF-1E474C5C0157}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceData", "ServiceProject\ServiceData.csproj", "{6E1C2D98-3F32-4305-A792-E3A3CAC6F0EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataApi", "ServiceProject\DataApi.csproj", "{6E1C2D98-3F32-4305-A792-E3A3CAC6F0EB}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TestDb", "TestDb\TestDb.sqlproj", "{2CD70CEF-5BC2-48D0-8DA5-29B38BDB172F}"
 EndProject

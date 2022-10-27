@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 string connectionSting = builder.Configuration.GetConnectionString("WebAPIProductsContext") ?? throw new InvalidOperationException("Connection string 'WebAPIProductsContext' not found.");
 
-builder.Services.AddSingleton<ServiceData.IData>(provider => new ServiceData.Data(connectionSting));
+builder.Services.AddSingleton<DataApi.IData>(provider => new DataApi.Data(connectionSting));
 
 // Add services to the container.
 builder.Services.AddControllers();

@@ -23,6 +23,8 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <TargetFrameworkProfile />
+    <GenerateCreateScript>False</GenerateCreateScript>
+    <DacApplicationName>TestDb</DacApplicationName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -65,8 +67,8 @@
     <Build Include="EventLog.sql" />
     <Build Include="SearchProductVersion.sql" />
     <Build Include="ProductAdd.sql" />
-    <Build Include="ProjectChenge.sql" />
-    <Build Include="ProjectDelete.sql" />
+    <Build Include="ProductChenge.sql" />
+    <Build Include="ProductDelete.sql" />
     <Build Include="vProduct.sql" />
     <Build Include="vProductFull.sql" />
     <Build Include="vProductVersions.sql" />

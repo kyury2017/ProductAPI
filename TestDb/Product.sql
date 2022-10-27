@@ -1,10 +1,8 @@
 ﻿CREATE TABLE [dbo].[Product]
 (
-	[ID] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT newid(), 
+	[ID] uniqueidentifier NOT NULL PRIMARY KEY DEFAULT newid(), 
     [Name] NCHAR(255) NOT NULL, 
-    [Description] NTEXT NULL, 
-    CONSTRAINT [FK_Product_ProductVersion] FOREIGN KEY ([ID]) REFERENCES [ProductVersion]([ProductID]) ON DELETE CASCADE
-    
+    [Description] NTEXT NULL 
 )
 
 GO
