@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[ProjectChenge]
+﻿CREATE PROCEDURE [dbo].[ProductChenge]
 	@id uniqueidentifier, 
 	@name nchar(255),
 	@description ntext

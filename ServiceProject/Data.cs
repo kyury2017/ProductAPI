@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 //using Microsoft.AspNetCore.Mvc;
 
-namespace ServiceData
+namespace DataApi
 {
     public class Data : IData
     {

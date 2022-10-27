@@ -19,9 +19,9 @@ namespace WebAPIProducts.Controllers
     [ApiController]
     public class ProductVersionController : ControllerBase
     {
-        private readonly ServiceData.IData _context;
+        private readonly DataApi.IData _context;
 
-        public ProductVersionController(ServiceData.IData context)
+        public ProductVersionController(DataApi.IData context)
         {
             _context = context;
         }
@@ -49,7 +49,7 @@ namespace WebAPIProducts.Controllers
             {
                 return await _context.ProductVersionAdd(productVersion);
             }
-            catch (DbUpdateConcurrencyException ce)
+            catch (DbUpdateConcurrencyException)
             {
                 return Conflict();
             }

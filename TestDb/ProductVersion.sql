@@ -4,11 +4,12 @@
     [ProductID] UNIQUEIDENTIFIER NOT NULL, 
     [Name] NCHAR(255) NOT NULL, 
     [Description] NTEXT NULL, 
-    [CreatingDate] DATETIME NOT NULL, 
+    [CreatingDate] DATETIME NOT NULL DEFAULT (getdate()), 
     [Width] [dbo].[ubigint] NOT NULL, 
     [Height] [dbo].[ubigint] NOT NULL, 
     [Length] [dbo].[ubigint] NOT NULL, 
-    
+    CONSTRAINT [PK_ProductVersion] PRIMARY KEY ([ID]), 
+    CONSTRAINT [FK_ProductVersion_Product] FOREIGN KEY ([ProductID]) REFERENCES [Product]([ID]) 
 )
 
 GO

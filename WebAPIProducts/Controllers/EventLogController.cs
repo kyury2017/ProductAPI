@@ -8,8 +8,8 @@ namespace WebAPIProducts.Controllers
     [ApiController]
     public class EventLogController : ControllerBase
     {
-        private readonly ServiceData.IData _context;
-        public EventLogController(ServiceData.IData context)
+        private readonly DataApi.IData _context;
+        public EventLogController(DataApi.IData context)
         {
             _context = context;
         }
